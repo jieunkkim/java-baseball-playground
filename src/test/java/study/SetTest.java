@@ -50,6 +50,7 @@ public class SetTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 3})
+    @DisplayName("contains Param 테스트")
     void contains_using_ParameterizedTest(int i) {
         assertThat(numbers).contains(i);
     }
