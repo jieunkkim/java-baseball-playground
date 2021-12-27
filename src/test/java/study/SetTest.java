@@ -1,9 +1,11 @@
 package study;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
@@ -60,9 +62,17 @@ public class SetTest {
      * - 요구사항 2는 contains 메소드 결과 값이 true인 경우만 테스트 가능하다. 입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능하도록 구현한다.
      * - 예를 들어 1, 2, 3 값은 contains 메소드 실행결과 true, 4, 5 값을 넣으면 false 가 반환되는 테스트를 하나의 Test Case로 구현한다.
      */
-    @Test
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"}, delimiter = ':')
     @DisplayName("contains 테스트 (T/F)")
-    void contains_both_trueFalse() {
+    void contains_both_trueFalse(int input, boolean expected) {
+        assertEquals(numbers.contains(input), expected);
+    }
+
+    @Ignore
+    @Test
+    @DisplayName("ign - contains 테스트 (T/F)")
+    void ign_contains_both_trueFalse() {
         assertAll(
                 () -> assertTrue(numbers.contains(1))
                 , () -> assertTrue(numbers.contains(2))
